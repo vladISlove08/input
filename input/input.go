@@ -9,6 +9,7 @@ import (
 	"strconv"
 	"strings"
 	"unicode"
+	//"reflect"
 )
 
 // ReadInput читает строку ввода от пользователя.
@@ -22,7 +23,8 @@ func ReadInput() (string, error) {
 }
 
 // GetInt получает целое число от пользователя.
-func GetInt() (int64, error) {
+func GetInt(prompt string) (int64, error) {
+	fmt.Printf("%s", prompt)
 	input, err := ReadInput()
 	if err != nil {
 		return 0, err
@@ -30,14 +32,15 @@ func GetInt() (int64, error) {
 
 	val, err := strconv.ParseInt(input, 10, 64)
 	if err != nil {
-		return 0, fmt.Errorf("invalid integer: %w", err)
+		return 0, fmt.Errorf("invalid integer: %w,", err)
 	}
 
 	return val, nil
 }
 
 // GetFloat получает число с плавающей точкой от пользователя.
-func GetFloat() (float64, error) {
+func GetFloat(prompt string) (float64, error) {
+	fmt.Printf("%s", prompt)
 	input, err := ReadInput()
 	if err != nil {
 		return 0, err
@@ -52,7 +55,8 @@ func GetFloat() (float64, error) {
 }
 
 // GetBool получает булевое значение от пользователя.
-func GetBool() (bool, error) {
+func GetBool(prompt string) (bool, error) {
+	fmt.Printf("%s", prompt)
 	input, err := ReadInput()
 	if err != nil {
 		return false, err
@@ -67,9 +71,11 @@ func GetBool() (bool, error) {
 }
 
 // GetString получает строку от пользователя.
-func GetString() (string, error) {
+func GetString(prompt string) (string, error) {
+	fmt.Printf("%s", prompt)
 	return ReadInput()
 }
+
 
 // PrintError выводит ошибку в лог.
 func LogErr(err error) {
@@ -79,18 +85,19 @@ func LogErr(err error) {
 }
 
 // GetName запрашивает имя у пользователя и проверяет, чтобы оно содержало только буквы.
-func GetName() (string, error) {
-	xname, err := GetString()
+func GetName(prompt string) (string, error) {
+	fmt.Printf("%s", prompt)
+	name, err := GetString("")
 	if err != nil {
 		return "", err
 	}
 
-	for _, char := range xname {
+	for _, char := range name {
 		if !unicode.IsLetter(char) {
 			return "", errors.New("name must contain only letters")
 		}
 	}
 
-	return xname, nil
+	return name, nil
 }
 
