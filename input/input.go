@@ -94,10 +94,10 @@ func GetName(prompt string) (string, error) {
 
 	for _, char := range name {
 		if !unicode.IsLetter(char) {
-			return "", errors.New("name must contain only letters.")
+			return "", errors.New("name must contain only letters")
 		}
 	}
 
 	return name, nil
 }
-
+//12321
